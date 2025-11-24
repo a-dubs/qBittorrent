@@ -884,6 +884,13 @@
              </widget>
             </item>
             <item>
+             <widget class="QCheckBox" name="checkBoxConnectionCountStatusBar">
+              <property name="text">
+               <string>Show connection count in status bar</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QCheckBox" name="checkBoxPerformanceWarning">
               <property name="text">
                <string>Log performance warnings</string>

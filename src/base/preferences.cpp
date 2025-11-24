@@ -424,6 +424,19 @@ void Preferences::setStatusbarExternalIPDisplayed(const bool displayed)
     setValue(u"Preferences/General/StatusbarExternalIPDisplayed"_s, displayed);
 }
 
+bool Preferences::isStatusbarConnectionCountDisplayed() const
+{
+    return value(u"Preferences/General/StatusbarConnectionCountDisplayed"_s, false);
+}
+
+void Preferences::setStatusbarConnectionCountDisplayed(const bool displayed)
+{
+    if (displayed == isStatusbarConnectionCountDisplayed())
+        return;
+
+    setValue(u"Preferences/General/StatusbarConnectionCountDisplayed"_s, displayed);
+}
+
 bool Preferences::isSplashScreenDisabled() const
 {
     return value(u"Preferences/General/NoSplashScreen"_s, true);

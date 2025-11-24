@@ -63,6 +63,8 @@ private slots:
 private:
     void updateConnectionStatus();
     void updateDHTNodesNumber();
+    void updateConnectionsLabel();
+    void updateConnectionsVisibility();
     void updateFreeDiskSpaceLabel(qint64 value);
     void updateFreeDiskSpaceVisibility();
     void updateExternalAddressesLabel();
@@ -77,6 +79,8 @@ private:
     QWidget *m_lastExternalIPsSeparator = nullptr;
     QLabel *m_DHTLbl = nullptr;
     QWidget *m_DHTSeparator = nullptr;
+    QLabel *m_connectionsLbl = nullptr;
+    QWidget *m_connectionsSeparator = nullptr;
     QPushButton *m_connecStatusLblIcon = nullptr;
     QPushButton *m_altSpeedsBtn = nullptr;
 };
