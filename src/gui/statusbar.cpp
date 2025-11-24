@@ -112,6 +112,10 @@ StatusBar::StatusBar(QWidget *parent)
     m_DHTLbl->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
     m_DHTSeparator = createSeparator(m_DHTLbl);
 
+    m_connectionsLbl = new QLabel(tr("Connections: %1").arg(0), this);
+    m_connectionsLbl->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Preferred);
+    m_connectionsSeparator = createSeparator(m_connectionsLbl);
+
     m_altSpeedsBtn = new QPushButton(this);
     m_altSpeedsBtn->setFlat(true);
     m_altSpeedsBtn->setFocusPolicy(Qt::NoFocus);
@@ -141,6 +145,9 @@ StatusBar::StatusBar(QWidget *parent)
     layout->addWidget(m_DHTLbl);
     layout->addWidget(m_DHTSeparator);
 
+    layout->addWidget(m_connectionsLbl);
+    layout->addWidget(m_connectionsSeparator);
+
     layout->addWidget(m_connecStatusLblIcon);
     layout->addWidget(createSeparator(m_connecStatusLblIcon));
 
@@ -158,6 +165,7 @@ StatusBar::StatusBar(QWidget *parent)
     adjustSize();
     updateFreeDiskSpaceVisibility();
     updateExternalAddressesVisibility();
+    updateConnectionsVisibility();
     // Is DHT enabled
     const bool isDHTVisible = session->isDHTEnabled();
     m_DHTLbl->setVisible(isDHTVisible);
@@ -235,6 +243,19 @@ void StatusBar::updateDHTNodesNumber()
     }
 }
 
+void StatusBar::updateConnectionsLabel()
+{
+    const BitTorrent::SessionStatus &sessionStatus = BitTorrent::Session::instance()->status();
+    m_connectionsLbl->setText(tr("Connections: %1").arg(sessionStatus.peersCount));
+}
+
+void StatusBar::updateConnectionsVisibility()
+{
+    const bool isVisible = Preferences::instance()->isStatusbarConnectionCountDisplayed();
+    m_connectionsLbl->setVisible(isVisible);
+    m_connectionsSeparator->setVisible(isVisible);
+}
+
 void StatusBar::updateFreeDiskSpaceLabel(const qint64 value)
 {
     m_freeDiskSpaceLbl->setText(tr("Free space: ") + Utils::Misc::friendlyUnit(value));
@@ -294,6 +315,7 @@ void StatusBar::refresh()
 {
     updateConnectionStatus();
     updateDHTNodesNumber();
+    updateConnectionsLabel();
     updateExternalAddressesLabel();
     updateSpeedLabels();
 }
@@ -326,4 +348,5 @@ void StatusBar::optionsSaved()
 {
     updateFreeDiskSpaceVisibility();
     updateExternalAddressesVisibility();
+    updateConnectionsVisibility();
 }

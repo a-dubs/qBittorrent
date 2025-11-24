@@ -127,6 +127,8 @@ public:
     void setStatusbarFreeDiskSpaceDisplayed(bool displayed);
     bool isStatusbarExternalIPDisplayed() const;
     void setStatusbarExternalIPDisplayed(bool displayed);
+    bool isStatusbarConnectionCountDisplayed() const;
+    void setStatusbarConnectionCountDisplayed(bool displayed);
     bool isToolbarDisplayed() const;
     void setToolbarDisplayed(bool displayed);
     bool isTorrentContentDragEnabled() const;
